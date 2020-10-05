@@ -1,0 +1,3 @@
+# About
+
+A simple API for returning random Jeopardy clues used in past games. A work in progress... 
