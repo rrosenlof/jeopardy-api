@@ -35,6 +35,17 @@ def api_random():
     random = cur.execute(query,[rand_index]).fetchone()
     return jsonify(random)
 
+@app.route('/api/v1/jeopardy/categories/random', methods=['GET'])
+def api_random_full_cat():
+    conn = sqlite3.connect('./j.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    count = cur.execute('SELECT COUNT(cat_id) as count FROM questions;').fetchone()
+    rand_index = str(randrange(1,count['count']))
+    query = 'SELECT * FROM questions where id=?;'
+    random = cur.execute(query,[rand_index]).fetchone()
+    return jsonify(random)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
