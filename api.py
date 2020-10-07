@@ -16,14 +16,6 @@ def dict_factory(cursor, row):
 def home():
     return "<h1>Jeopardy API</h1><p>Simple REST API to return random Jeopardy clues used in past games.</p>"
 
-# @app.route('/api/v1/jeopardy/questions/all', methods=['GET'])
-# def api_all():
-#     conn = sqlite3.connect('./j.db')
-#     conn.row_factory = dict_factory
-#     cur = conn.cursor()
-#     all_qs = cur.execute('SELECT * FROM questions;').fetchall()
-#     return jsonify(all_qs)
-
 @app.route('/api/v1/jeopardy/questions/random', methods=['GET'])
 def api_random():
     conn = sqlite3.connect('./j.db')
@@ -40,10 +32,12 @@ def api_random_full_cat():
     conn = sqlite3.connect('./j.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    count = cur.execute('SELECT COUNT(cat_id) as count FROM questions;').fetchone()
-    rand_index = str(randrange(1,count['count']))
-    query = 'SELECT * FROM questions where id=?;'
-    random = cur.execute(query,[rand_index]).fetchone()
+    cat_ids = cur.execute('select distinct cat_id from questions where full_category is \'TRUE\';').fetchall()
+    max_id = len(cat_ids)
+    rand_index = randrange(1,max_id)
+    rand_cat_id = cat_ids[rand_index]['cat_id']
+    query = 'SELECT * FROM questions where cat_id=?;'
+    random = cur.execute(query,[rand_cat_id]).fetchall()
     return jsonify(random)
 
 
