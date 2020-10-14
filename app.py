@@ -14,7 +14,7 @@ def dict_factory(cursor, row):
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Jeopardy API</h1><p>Simple REST API to return random Jeopardy clues used in past games.</p>"
+    return "<h1>Jeopardy REST API</h1><p>Simple REST API to return random Jeopardy clues used in past games.</p>"
 
 @app.route('/api/v1/jeopardy/questions/random', methods=['GET'])
 def api_random():
