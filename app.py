@@ -1,5 +1,6 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, send_from_directory
+import os
 import sqlite3
 from random import randrange
 
@@ -11,6 +12,11 @@ def dict_factory(cursor, row):
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods=['GET'])
 def home():
