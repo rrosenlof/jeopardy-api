@@ -4,7 +4,7 @@ import sqlite3
 from random import randrange
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 def dict_factory(cursor, row):
     d = {}
