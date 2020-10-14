@@ -1,11 +1,10 @@
 import flask
-from flask import request, jsonify, send_from_directory
+from flask import request, jsonify, send_from_directory, Flask
 import os
 import sqlite3
 from random import randrange
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = False
+app = Flask(__name__)
 
 def dict_factory(cursor, row):
     d = {}
@@ -51,4 +50,5 @@ def api_random_full_cat():
 def page_not_found(e):
     return "<h1>404</h1><br /><p>The resource could not be found.</p>", 404
 
-app.run()
+if __name__ == '__main__':
+    app.run()
