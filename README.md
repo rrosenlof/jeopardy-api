@@ -16,6 +16,6 @@ GET function that returns a random Jeopardy question and answer.
 
 ### Random Category
 
-https://jeopardy-rest-api.herokuapp.com/api/v1/jeopardy/questions/random
+https://jeopardy-rest-api.herokuapp.com/api/v1/jeopardy/categories/random
 
 GET function that returns a full, random Jeopardy category. This means 5 questions and answers. Question amounts are a bit off, since Daily Double values are recorded as the contestant's wager, not the original question value.
