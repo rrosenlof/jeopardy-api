@@ -32,6 +32,16 @@ def api_random():
     random = cur.execute(query,[rand_index]).fetchone()
     return jsonify(random)
 
+@app.route('/api/v1/jeopardy/questions/id=<id>', methods=['GET'])
+def api_by_id(id):
+    print(id)
+    conn = sqlite3.connect('./j.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    query = 'SELECT * FROM questions where id=?;'
+    clue = cur.execute(query,[id]).fetchall()
+    return jsonify(clue)
+
 @app.route('/api/v1/jeopardy/categories/random', methods=['GET'])
 def api_random_full_cat():
     conn = sqlite3.connect('./j.db')
